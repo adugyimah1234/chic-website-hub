@@ -12,4 +12,8 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  nitro: {
+    // Build for the Node runtime that `npm run start` uses instead of the default edge preset.
+    preset: "node-server",
+  },
 });
