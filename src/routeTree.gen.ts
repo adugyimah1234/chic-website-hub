@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as LeadershipRouteImport } from './routes/leadership'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConferenceRouteImport } from './routes/conference'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -25,9 +27,19 @@ const LeadershipRoute = LeadershipRouteImport.update({
   path: '/leadership',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConferenceRoute = ConferenceRouteImport.update({
+  id: '/conference',
+  path: '/conference',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -44,14 +56,18 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/conference': typeof ConferenceRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/leadership': typeof LeadershipRoute
   '/programs': typeof ProgramsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/conference': typeof ConferenceRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/leadership': typeof LeadershipRoute
   '/programs': typeof ProgramsRoute
 }
@@ -59,22 +75,48 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/conference': typeof ConferenceRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/leadership': typeof LeadershipRoute
   '/programs': typeof ProgramsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/leadership' | '/programs'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/conference'
+    | '/contact'
+    | '/gallery'
+    | '/leadership'
+    | '/programs'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/leadership' | '/programs'
-  id: '__root__' | '/' | '/about' | '/contact' | '/leadership' | '/programs'
+  to:
+    | '/'
+    | '/about'
+    | '/conference'
+    | '/contact'
+    | '/gallery'
+    | '/leadership'
+    | '/programs'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/conference'
+    | '/contact'
+    | '/gallery'
+    | '/leadership'
+    | '/programs'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ConferenceRoute: typeof ConferenceRoute
   ContactRoute: typeof ContactRoute
+  GalleryRoute: typeof GalleryRoute
   LeadershipRoute: typeof LeadershipRoute
   ProgramsRoute: typeof ProgramsRoute
 }
@@ -95,11 +137,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeadershipRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conference': {
+      id: '/conference'
+      path: '/conference'
+      fullPath: '/conference'
+      preLoaderRoute: typeof ConferenceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -122,7 +178,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ConferenceRoute: ConferenceRoute,
   ContactRoute: ContactRoute,
+  GalleryRoute: GalleryRoute,
   LeadershipRoute: LeadershipRoute,
   ProgramsRoute: ProgramsRoute,
 }
