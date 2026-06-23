@@ -1,22 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "./about";
 import { assetUrl } from "@/lib/assetUrl";
-import wcmBackground from "@/assets/hero-bg.png";
-import wcmHeadquarters from "@/assets/wcmgh_headequarters_building.png";
-import panelMC from "@/assets/Dr. Owusuaa Eshia.png";
-import panelNiine from "@/assets/Hon. Francis Akumatey Addo.png";
-import panelGloria from "@/assets/Mr. Michael Kpakpo Allotey.png";
-import panelStrategic from "@/assets/Hon. Abraham Dwuma Odoom.png";
-import mahama from "@/assets/H. E. JOHN DRAMANI MAHAMA.png";
-import naana from "@/assets/H.E. NAANA JANE OPOKU-AGYEMANG. PHD, FGA.png";
-import terkper from "@/assets/Dr. Peter Kwesi Terkper.png";
-import mbengue from "@/assets/Dr. Abdoulaye Mbengue.png";
-import fayeWilliams from "@/assets/Amb. Dr. E. Faye Williams.png";
-import jimmieGardener from "@/assets/Hon. Jimmie Gardener.png";
-import frankJackson from "@/assets/Mr. Mayor Frank Jackson.png";
-import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.png";
-import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.png";
-import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.png";
+import wcmBackground from "@/assets/hero-bg.small.png";
+import wcmHeadquarters from "@/assets/wcmgh_headequarters_building.small.png";
+import panelMC from "@/assets/Dr. Owusuaa Eshia.small.png";
+import panelNiine from "@/assets/Hon. Francis Akumatey Addo.small.png";
+import panelGloria from "@/assets/Mr. Michael Kpakpo Allotey.small.png";
+import panelStrategic from "@/assets/Hon. Abraham Dwuma Odoom.small.png";
+import mahama from "@/assets/H. E. JOHN DRAMANI MAHAMA.small.png";
+import naana from "@/assets/H.E. NAANA JANE OPOKU-AGYEMANG. PHD, FGA.small.png";
+import terkper from "@/assets/Dr. Peter Kwesi Terkper.small.png";
+import mbengue from "@/assets/Dr. Abdoulaye Mbengue.small.png";
+import fayeWilliams from "@/assets/Amb. Dr. E. Faye Williams.small.png";
+import jimmieGardener from "@/assets/Hon. Jimmie Gardener.small.png";
+import frankJackson from "@/assets/Mr. Mayor Frank Jackson.small.png";
+import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.small.png";
+import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.small.png";
+import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.small.png";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({

@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "./about";
-import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.png";
-import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.png";
-import terkper from "@/assets/Dr. Peter Kwesi Terkper.png";
-import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.png";
-import mbengue from "@/assets/Dr. Abdoulaye Mbengue.png";
-import fayeWilliams from "@/assets/Amb. Dr. E. Faye Williams.png";
-import jimmieGardener from "@/assets/Hon. Jimmie Gardener.png";
-import frankJackson from "@/assets/Mr. Mayor Frank Jackson.png";
+import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.small.png";
+import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.small.png";
+import terkper from "@/assets/Dr. Peter Kwesi Terkper.small.png";
+import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.small.png";
+import mbengue from "@/assets/Dr. Abdoulaye Mbengue.small.png";
+import fayeWilliams from "@/assets/Amb. Dr. E. Faye Williams.small.png";
+import jimmieGardener from "@/assets/Hon. Jimmie Gardener.small.png";
+import frankJackson from "@/assets/Mr. Mayor Frank Jackson.small.png";
 
 export const Route = createFileRoute("/leadership")({
   head: () => ({

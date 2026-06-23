@@ -20,18 +20,17 @@ import {
   Flag,
 } from "lucide-react";
 
-import heroBg from "@/assets/hero-bg.png.asset.json";
-import cityscape from "@/assets/cityscape.png.asset.json";
-import ministry from "@/assets/ministry-lg.png.asset.json";
-import economy from "@/assets/24hour-economy.png.asset.json";
-import migration from "@/assets/holistic-migration.png.asset.json";
+import heroBg from "@/assets/hero-bg.small.png";
+import cityscape from "@/assets/cityscape.small.png";
+import ministry from "@/assets/ministry-lg.small.png";
+import economy from "@/assets/24hour-economy.small.png";
+import migration from "@/assets/holistic-migration.small.png";
 import farmers from "@/assets/makane-farmers.png.asset.json";
-import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.png";
-import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.png";
-import terkper from "@/assets/Dr. Peter Kwesi Terkper.png";
-import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.png";
-import ghanaMap from "@/assets/ghanamap.png";
-import policyPdf from "@/assets/The Rebirth of Patriotism and Volunteerism in Ghana.pdf";
+import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.small.png";
+import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.small.png";
+import terkper from "@/assets/Dr. Peter Kwesi Terkper.small.png";
+import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.small.png";
+import ghanaMap from "@/assets/ghanamap.small.png";
 
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { assetUrl } from "@/lib/assetUrl";
@@ -56,9 +55,9 @@ export const Route = createFileRoute("/")({
 });
 
 const partners = [
-  { src: assetUrl(ministry), name: "Ministry of Local Government, Chieftaincy & Religious Affairs" },
-  { src: assetUrl(economy), name: "24 Hour Economy" },
-  { src: assetUrl(migration), name: "Holistic Migration Consult" },
+  { src: ministry, name: "Ministry of Local Government, Chieftaincy & Religious Affairs" },
+  { src: economy, name: "24 Hour Economy" },
+  { src: migration, name: "Holistic Migration Consult" },
   { src: assetUrl(farmers), name: "Makane Farmers Connect" },
 ];
 
@@ -164,7 +163,7 @@ function Home() {
     <>
       <section className="relative isolate overflow-hidden text-primary-foreground">
         <motion.img
-          src={assetUrl(heroBg)}
+          src={heroBg}
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
           initial={{ scale: 1.15 }}
@@ -635,7 +634,7 @@ function Home() {
         <Reveal>
           <div className="relative overflow-hidden rounded-2xl bg-navy p-12 md:p-20 text-primary-foreground">
             <motion.img
-              src={assetUrl(cityscape)}
+              src={cityscape}
               alt=""
               className="absolute inset-0 h-full w-full object-cover opacity-20"
               initial={{ scale: 1.1 }}
@@ -663,12 +662,10 @@ function Home() {
                 </motion.div>
                 <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.96 }}>
                   <a
-                    href={policyPdf}
-                    target="_blank"
-                    rel="noreferrer"
+                    href="/about"
                     className="inline-flex items-center gap-2 rounded-md border border-primary-foreground/30 px-7 py-3.5 text-sm font-semibold hover:bg-primary-foreground/10 transition-colors"
                   >
-                    Read the Policy Document
+                    Learn More
                   </a>
                 </motion.div>
               </div>

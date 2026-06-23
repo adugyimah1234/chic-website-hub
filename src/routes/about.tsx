@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import accra from "@/assets/headquarters.png.asset.json";
-import drivingForce from "@/assets/driving-force.png.asset.json";
+import drivingForce from "@/assets/driving-force.small.png";
 import { assetUrl } from "@/lib/assetUrl";
 
 export const Route = createFileRoute("/about")({
@@ -141,7 +141,7 @@ function About() {
             </p>
           </div>
           <img
-            src={assetUrl(drivingForce)}
+            src={drivingForce}
             alt="WCM Ghana leadership"
             loading="lazy"
             className="w-full rounded-lg shadow-elegant"

@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "./about";
 import { CalendarDays, Users, Presentation, Award, MapPinned, Sparkles } from "lucide-react";
-import moderatorKenneth from "@/assets/Hon. Kenneth Kabu Kanor.png";
-import moderatorFrancis from "@/assets/Hon. Francis Akumatey Addo.png";
-import moderatorAllotey from "@/assets/Mr. Michael Kpakpo Allotey.png";
-import moderatorOdoom from "@/assets/Hon. Abraham Dwuma Odoom.png";
-import headquarters from "@/assets/wcmgh_headequarters_building.png";
-import wcmBanner from "@/assets/wmcgh banner.png";
+import moderatorKenneth from "@/assets/Hon. Kenneth Kabu Kanor.small.png";
+import moderatorFrancis from "@/assets/Hon. Francis Akumatey Addo.small.png";
+import moderatorAllotey from "@/assets/Mr. Michael Kpakpo Allotey.small.png";
+import moderatorOdoom from "@/assets/Hon. Abraham Dwuma Odoom.small.png";
+import headquarters from "@/assets/wcmgh_headequarters_building.small.png";
+import wcmBanner from "@/assets/wmcgh banner.small.png";
 
 export const Route = createFileRoute("/conference")({
   head: () => ({
