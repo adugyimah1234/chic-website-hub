@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "cross-env NODE_OPTIONS=--max-old-space-size=1024 vite build",
+    "build": "node --max-old-space-size=1024 ./node_modules/vite/bin/vite.js build",
     "build:dev": "vite build --mode development",
     "start": "node dist/server/server.js",
     "preview": "vite preview",
@@ -84,7 +84,6 @@
     "globals": "^15.15.0",
     "nitro": "3.0.260603-beta",
     "prettier": "^3.7.3",
-    "cross-env": "^7.0.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.56.1",
     "vite": "^8.0.16"
