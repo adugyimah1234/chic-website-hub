@@ -15,6 +15,7 @@ import economy from "@/assets/24hour-economy.small.png";
 import migration from "@/assets/holistic-migration.small.png";
 import farmers from "@/assets/makane_farmers_connect.small.png";
 import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.small.png";
+import ishmaelDodoo from "@/assets/Hon. Dr. Ishmael Nii Amanor Dodoo.small.png";
 import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.small.png";
 import terkper from "@/assets/Dr. Peter Kwesi Terkper.small.png";
 import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.small.png";
@@ -271,19 +272,22 @@ function HomePage({ onNavigate }: { onNavigate: (href: string) => void }) {
             </Reveal>
             <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
               <img
-                src={johnnyFord}
-                alt="HON. JOHNNY FORD, FOUNDER & CEO"
-                className="h-full w-full object-cover"
+                src={ishmaelDodoo}
+                alt="Hon. Dr. Ishmael Nii Amanor Dodoo"
+                className="h-[420px] w-full object-cover object-top md:h-[500px]"
               />
-              <div className="border-t border-border bg-white px-5 py-4 text-center">
-                <div className="text-[0.68rem] uppercase tracking-[0.22em] text-navy/70 font-extrabold">
-                  World Conference of Mayors Inc.
+              <div className="border-t border-border bg-white px-4 py-3.5 text-center md:px-5 md:py-4">
+                <div className="text-[0.62rem] uppercase tracking-[0.18em] text-navy/70 font-extrabold">
+                  President, WCM Ghana
                 </div>
-                <div className="mt-2 text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-                  Hon. Johnny Ford
+                <div className="mt-1.5 text-[0.68rem] uppercase tracking-[0.14em] text-gold font-extrabold">
+                  Hon. Dr. Ishmael Nii Amanor Dodoo
                 </div>
-                <div className="mt-1 text-sm font-semibold text-navy">
-                  Founder &amp; CEO, World Conference of Mayors, USA
+                <div className="mt-1 text-[0.92rem] font-semibold leading-snug text-navy">
+                  Head of Innovative Finance, Partnership and Markets
+                </div>
+                <div className="mt-1 text-[0.92rem] font-semibold leading-snug text-navy">
+                  24-Hour Economy and Accelerated Development Secretariat, Office of the President, Accra-Ghana
                 </div>
               </div>
             </div>
@@ -564,7 +568,7 @@ function HomePage({ onNavigate }: { onNavigate: (href: string) => void }) {
       </section>
 
       {/* PARTNERS SECTION */}
-      <section className="border-t border-steel-blue/15 py-24 bg-slate-50 text-navy">
+      <section className="border-t border-steel-blue/10 py-18 bg-white text-navy">
         <div className="container-page">
           <div className="text-center max-w-2xl mx-auto">
             <span className="font-mono text-xs uppercase tracking-widest text-gold">
@@ -576,11 +580,15 @@ function HomePage({ onNavigate }: { onNavigate: (href: string) => void }) {
             <p className="mt-2 text-slate-500 text-xs font-mono">Working together across sectors</p>
           </div>
 
-          <Stagger className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <Stagger className="mt-14 grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
             {partners.map((p) => (
               <StaggerItem key={p.name}>
-                <div className="group flex h-36 flex-col items-center justify-center rounded-xl border border-steel-blue/20 bg-white p-4 transition-all duration-300 hover:border-gold hover:shadow-elegant hover:-translate-y-1">
-                  <img src={p.src} alt={p.name} className="h-20 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-500" />
+                <div className="group flex min-h-28 items-center justify-center px-3 py-2 transition-transform duration-300 hover:-translate-y-0.5">
+                  <img
+                    src={p.src}
+                    alt={p.name}
+                    className="max-h-20 w-auto max-w-full object-contain grayscale transition-all duration-500 group-hover:grayscale-0 sm:max-h-24 md:max-h-28"
+                  />
                 </div>
               </StaggerItem>
             ))}
