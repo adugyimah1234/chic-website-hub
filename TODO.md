@@ -13,4 +13,4 @@
   - [ ] Contact (address/email/phone + embedded Google Map)
 - [ ] Replace/update favicon to the navy-blue striped Ghana map sphere (wire to `public/` / manifest if needed).
 - [ ] Ensure consistent rounded corners + subtle shadows for images.
-- [ ] Build/test: run `bun`/`vite` preview and verify layout responsiveness.
+- [ ] Build/test: run `npm`/`vite` preview and verify layout responsiveness.
