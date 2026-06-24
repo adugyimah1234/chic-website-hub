@@ -18,6 +18,8 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
+const contactApiUrl = import.meta.env.VITE_CONTACT_API_URL ?? "/api/contact";
+
 function Contact() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -78,7 +80,7 @@ function Contact() {
               const payload = Object.fromEntries(formData.entries());
 
               try {
-                const response = await fetch("/api/contact", {
+                const response = await fetch(contactApiUrl, {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(payload),
