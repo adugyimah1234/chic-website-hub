@@ -20,6 +20,7 @@ import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.small.png"
 import ghanaMap from "@/assets/ghanamap.small.png";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { assetUrl } from "@/lib/assetUrl";
+import { useEffect, useState, type JSX } from "react";
 
 const partners = [
   { src: ministry, name: "Ministry of Local Government, Chieftaincy & Religious Affairs" },
@@ -92,7 +93,21 @@ const leadershipNetwork = [
 ];
 
 export default function App() {
-  const path = window.location.pathname;
+  const [path, setPath] = useState(() => window.location.pathname);
+
+  useEffect(() => {
+    const onPopState = () => setPath(window.location.pathname);
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  const navigate = (href: string) => {
+    if (href === path) return;
+    window.history.pushState({}, "", href);
+    setPath(href);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   let page: JSX.Element = <HomePage />;
   if (path === "/about") page = <AboutPage />;
   else if (path === "/conference") page = <ConferencePage />;
@@ -101,7 +116,7 @@ export default function App() {
   else if (path === "/programs") page = <ProgramsPage />;
   else if (path === "/contact") page = <ContactPage />;
   return (
-    <SiteLayout>
+    <SiteLayout pathname={path} onNavigate={navigate}>
       {page}
     </SiteLayout>
   );

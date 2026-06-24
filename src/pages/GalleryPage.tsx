@@ -50,11 +50,11 @@ export function GalleryPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <span className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">Leadership</span>
-            <h2 className="mt-4 font-display text-3xl font-bold text-navy md:text-4xl">Executive portraits</h2>
+            <h2 className="mt-4 font-display text-3xl font-bold text-navy md:text-4xl">Executive </h2>
           </div>
-          <p className="max-w-md text-sm leading-7 text-muted-foreground">
+          {/* <p className="max-w-md text-sm leading-7 text-muted-foreground">
             Each portrait is paired with a concise professional caption to keep the presentation clean and easy to scan.
-          </p>
+          </p> */}
         </div>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {leadership.map((item) => (
@@ -72,7 +72,7 @@ export function GalleryPage() {
         <div className="container-page">
           <div className="max-w-2xl">
             <span className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">Programme</span>
-            <h2 className="mt-4 font-display text-3xl font-bold text-navy md:text-4xl">Conference and moderation imagery</h2>
+            <h2 className="mt-4 font-display text-3xl font-bold text-navy md:text-4xl">Conference moderators</h2>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {programme.map((item) => (
@@ -85,23 +85,6 @@ export function GalleryPage() {
               </figure>
             ))}
           </div>
-        </div>
-      </section>
-      <section className="container-page py-20">
-        <div className="max-w-2xl">
-          <span className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">Institutional</span>
-          <h2 className="mt-4 font-display text-3xl font-bold text-navy md:text-4xl">Identity and place</h2>
-        </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {institutional.map((item) => (
-            <figure key={item.title} className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-              <img src={item.src} alt={item.title} className="h-72 w-full object-cover" />
-              <figcaption className="p-5">
-                <h3 className="font-display text-xl font-bold text-navy">{item.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">{item.caption}</p>
-              </figcaption>
-            </figure>
-          ))}
         </div>
       </section>
     </>

@@ -16,9 +16,22 @@ const nav = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
-function Logo({ variant = "light" }: { variant?: "light" | "dark" }) {
+function Logo({
+  variant = "light",
+  onNavigate,
+}: {
+  variant?: "light" | "dark";
+  onNavigate: (href: string) => void;
+}) {
   return (
-    <a href="/" className="group flex items-center gap-3">
+    <a
+      href="/"
+      className="group flex items-center gap-3"
+      onClick={(event) => {
+        event.preventDefault();
+        onNavigate("/");
+      }}
+    >
       <motion.img
         src={assetUrl(logo)}
         alt="WCM Ghana"
@@ -44,18 +57,48 @@ function Logo({ variant = "light" }: { variant?: "light" | "dark" }) {
   );
 }
 
-function NavLink({ href, label }: { href: string; label: string }) {
+function NavLink({
+  href,
+  label,
+  pathname,
+  onNavigate,
+}: {
+  href: string;
+  label: string;
+  pathname: string;
+  onNavigate: (href: string) => void;
+}) {
+  const active = pathname === href;
   return (
-      <a href={href}
-      className="group relative rounded-md px-4 py-2 text-sm font-medium text-foreground/75 transition-colors hover:text-navy"
+    <a
+      href={href}
+      onClick={(event) => {
+        event.preventDefault();
+        onNavigate(href);
+      }}
+      className={`group relative rounded-md px-4 py-2 text-sm transition-colors hover:text-navy ${
+        active ? "font-semibold text-navy" : "font-medium text-foreground/75"
+      }`}
     >
       <span className="relative z-10">{label}</span>
-      <span className="absolute left-3 right-3 -bottom-0.5 h-[2px] origin-left scale-x-0 bg-gold transition-transform duration-300 group-hover:scale-x-100" />
+      <span
+        className={`absolute left-3 right-3 -bottom-0.5 h-[2px] origin-left bg-gold transition-transform duration-300 ${
+          active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+        }`}
+      />
     </a>
   );
 }
 
-export function SiteLayout({ children }: { children: ReactNode }) {
+export function SiteLayout({
+  children,
+  pathname,
+  onNavigate,
+}: {
+  children: ReactNode;
+  pathname: string;
+  onNavigate: (href: string) => void;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -79,14 +122,24 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-md">
         <div className="container-page flex h-18 items-center justify-between py-3">
-          <Logo />
+          <Logo onNavigate={onNavigate} />
           <nav className="hidden items-center gap-1 lg:flex">
             {nav.map((n) => (
-              <NavLink key={n.href} href={n.href} label={n.label} />
+              <NavLink
+                key={n.href}
+                href={n.href}
+                label={n.label}
+                pathname={pathname}
+                onNavigate={onNavigate}
+              />
             ))}
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.96 }}>
-                <a
+              <a
                 href="/contact"
+                onClick={(event) => {
+                  event.preventDefault();
+                  onNavigate("/contact");
+                }}
                 className="ml-3 inline-flex items-center rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md shadow-navy/20 transition-colors hover:bg-navy-light"
               >
                 Get Involved
@@ -130,8 +183,14 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.04 * i, duration: 0.3 }}
                   >
-                      <a href={n.href}
+                    <a
+                      href={n.href}
                       onClick={() => setOpen(false)}
+                      onClickCapture={(event) => {
+                        event.preventDefault();
+                        setOpen(false);
+                        onNavigate(n.href);
+                      }}
                       className="block border-b border-border/50 py-3 text-sm font-medium text-foreground/80"
                     >
                       {n.label}
@@ -152,7 +211,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         <div className="container-page grid gap-10 py-16 md:grid-cols-4">
           <div className="md:col-span-2">
             <div className="mb-4">
-              <Logo variant="dark" />
+              <Logo variant="dark" onNavigate={onNavigate} />
             </div>
             <p className="max-w-md text-sm leading-relaxed text-primary-foreground/70">
               Connecting mayors and civic leaders across Ghana and beyond to strengthen public
@@ -166,6 +225,10 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                 <li key={n.href}>
                   <a
                     href={n.href}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      onNavigate(n.href);
+                    }}
                     className="inline-block transition-all hover:translate-x-1 hover:text-gold"
                   >
                     {n.label}
