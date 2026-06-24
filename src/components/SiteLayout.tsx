@@ -1,5 +1,4 @@
-import { Link, Outlet } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Menu, X, Mail, Phone, MapPin } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "@/assets/logo.png.asset.json";
@@ -8,18 +7,16 @@ import { PageTransition, ScrollProgress } from "./Motion";
 import { Toaster } from "./ui/sonner";
 
 const nav = [
-  { to: "/", label: "Home" },
-  { to: "/conference", label: "Conference" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/about", label: "About" },
-  { to: "/leadership", label: "Leadership" },
-  { to: "/programs", label: "Programs" },
-  { to: "/contact", label: "Contact" },
+  { href: "#home", label: "Home" },
+  { href: "#conference", label: "Conference" },
+  { href: "#leadership", label: "Leadership" },
+  { href: "#programs", label: "Programs" },
+  { href: "#contact", label: "Contact" },
 ] as const;
 
 function Logo({ variant = "light" }: { variant?: "light" | "dark" }) {
   return (
-    <Link to="/" className="group flex items-center gap-3">
+    <a href="#home" className="group flex items-center gap-3">
       <motion.img
         src={assetUrl(logo)}
         alt="WCM Ghana"
@@ -40,34 +37,24 @@ function Logo({ variant = "light" }: { variant?: "light" | "dark" }) {
         >
           World Conference of Mayors
         </div>
-      </div>
-    </Link>
+        </div>
+    </a>
   );
 }
 
-function NavLink({ to, label, exact }: { to: string; label: string; exact?: boolean }) {
+function NavLink({ href, label }: { href: string; label: string }) {
   return (
-    <Link
-      to={to}
+    <a
+      href={href}
       className="group relative rounded-md px-4 py-2 text-sm font-medium text-foreground/75 transition-colors hover:text-navy"
-      activeProps={{ className: "rounded-md px-4 py-2 text-sm font-semibold text-navy" }}
-      activeOptions={{ exact }}
     >
-      {({ isActive }) => (
-        <>
-          <span className="relative z-10">{label}</span>
-          <span
-            className={`absolute left-3 right-3 -bottom-0.5 h-[2px] origin-left bg-gold transition-transform duration-300 ${
-              isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-            }`}
-          />
-        </>
-      )}
-    </Link>
+      <span className="relative z-10">{label}</span>
+      <span className="absolute left-3 right-3 -bottom-0.5 h-[2px] origin-left scale-x-0 bg-gold transition-transform duration-300 group-hover:scale-x-100" />
+    </a>
   );
 }
 
-export function SiteLayout() {
+export function SiteLayout({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -94,15 +81,15 @@ export function SiteLayout() {
           <Logo />
           <nav className="hidden items-center gap-1 lg:flex">
             {nav.map((n) => (
-              <NavLink key={n.to} to={n.to} label={n.label} exact={n.to === "/"} />
+              <NavLink key={n.href} href={n.href} label={n.label} />
             ))}
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.96 }}>
-              <Link
-                to="/contact"
+              <a
+                href="#contact"
                 className="ml-3 inline-flex items-center rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md shadow-navy/20 transition-colors hover:bg-navy-light"
               >
                 Get Involved
-              </Link>
+              </a>
             </motion.div>
           </nav>
           <button
@@ -137,18 +124,18 @@ export function SiteLayout() {
               <div className="container-page flex flex-col py-3">
                 {nav.map((n, i) => (
                   <motion.div
-                    key={n.to}
+                    key={n.href}
                     initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.04 * i, duration: 0.3 }}
                   >
-                    <Link
-                      to={n.to}
+                    <a
+                      href={n.href}
                       onClick={() => setOpen(false)}
                       className="block border-b border-border/50 py-3 text-sm font-medium text-foreground/80"
                     >
                       {n.label}
-                    </Link>
+                    </a>
                   </motion.div>
                 ))}
               </div>
@@ -158,9 +145,7 @@ export function SiteLayout() {
       </header>
 
       <main className="flex-1">
-        <PageTransition>
-          <Outlet />
-        </PageTransition>
+        <PageTransition>{children}</PageTransition>
       </main>
 
       <footer className="mt-24 bg-navy text-primary-foreground">
@@ -178,13 +163,13 @@ export function SiteLayout() {
             <h4 className="mb-4 font-display text-sm font-bold uppercase text-gold">Explore</h4>
             <ul className="space-y-2.5 text-sm text-primary-foreground/70">
               {nav.map((n) => (
-                <li key={n.to}>
-                  <Link
-                    to={n.to}
+                <li key={n.href}>
+                  <a
+                    href={n.href}
                     className="inline-block transition-all hover:translate-x-1 hover:text-gold"
                   >
                     {n.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

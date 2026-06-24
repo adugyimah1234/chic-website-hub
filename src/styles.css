@@ -1,6 +1,6 @@
 @import "tailwindcss";
-@source "../src";
 @import "tw-animate-css";
+@source "../src";
 
 @theme inline {
   --font-display: "Montserrat", system-ui, sans-serif;
