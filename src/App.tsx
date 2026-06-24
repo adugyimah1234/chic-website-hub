@@ -5,8 +5,9 @@ import { ContactPage } from "@/pages/ContactPage";
 import { GalleryPage } from "@/pages/GalleryPage";
 import { LeadershipPage } from "@/pages/LeadershipPage";
 import { ProgramsPage } from "@/pages/ProgramsPage";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Award, BadgeCheck, BookOpen, ChevronRight, GraduationCap, Handshake, Heart, MapPinned, ShieldCheck, Target, Trees, Users, Flag } from "lucide-react";
+
 import heroBg from "@/assets/hero-bg.small.png";
 import cityscape from "@/assets/cityscape.small.png";
 import ministry from "@/assets/ministry-lg.small.png";
@@ -17,6 +18,8 @@ import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.small.png";
 import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.small.png";
 import terkper from "@/assets/Dr. Peter Kwesi Terkper.small.png";
 import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.small.png";
+import mahama from "@/assets/H. E. JOHN DRAMANI MAHAMA.small.png";
+import naana from "@/assets/H.E. NAANA JANE OPOKU-AGYEMANG. PHD, FGA.small.png";
 import ghanaMap from "@/assets/ghanamap.small.png";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 import { useEffect, useState, type JSX } from "react";
@@ -90,6 +93,11 @@ const leadershipNetwork = [
     image: wakeelahMartinez,
   },
 ];
+const heroStats = [
+  { value: "1957", label: "Inspiration" },
+  { value: "1984", label: "Founded" },
+  { value: "Ghana HQ", label: "Launched" },
+];
 
 export default function App() {
   const [path, setPath] = useState(() => window.location.pathname);
@@ -107,7 +115,7 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  let page: JSX.Element = <HomePage />;
+  let page: JSX.Element = <HomePage onNavigate={navigate} />;
   if (path === "/about") page = <AboutPage />;
   else if (path === "/conference") page = <ConferencePage />;
   else if (path === "/gallery") page = <GalleryPage />;
@@ -121,239 +129,351 @@ export default function App() {
   );
 }
 
-function HomePage() {
+function HomePage({ onNavigate }: { onNavigate: (href: string) => void }) {
+  const [activeT, setActiveT] = useState(0);
+
+  const tsDetails = [
+    { title: "Trust", desc: "Building public trust through accountability, open communication, and transparent governance in our local assemblies.", tag: "Transparency" },
+    { title: "Trade", desc: "Facilitating city-to-city trade networks and connecting local Ghanaian producers with global market opportunities.", tag: "Economic Growth" },
+    { title: "Tourism", desc: "Promoting Ghana's rich cultural heritage, historical sites, and eco-tourism to drive sustainable municipal revenue.", tag: "Culture & Heritage" },
+    { title: "Technology", desc: "Deploying modern digital tools to streamline revenue collection, citizen engagement, and public service delivery.", tag: "Digitalization" },
+    { title: "Treasury", desc: "Enforcing fiscal discipline, optimizing local revenue generation, and ensuring responsible resource stewardship.", tag: "Financial Health" },
+    { title: "Training", desc: "Equipping assembly leaders, youth, and administrators with cutting-edge public administration skills.", tag: "Capacity Building" },
+    { title: "Twin-City", desc: "Establishing cross-border municipal partnerships to exchange technical expertise, culture, and investment.", tag: "Global Ties" }
+  ];
+
   return (
     <>
       <section className="relative isolate overflow-hidden text-primary-foreground">
         <motion.img
           src={heroBg}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover"
-          initial={{ scale: 1.15 }}
+          alt="WCM Ghana hero background"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          initial={{ scale: 1.04 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 1.6, ease }}
+          transition={{ duration: 1.1, ease }}
         />
-        <div className="absolute inset-0 bg-linear-to-br from-navy/65 via-navy/95 to-navy/10" />
-        <div className="container-page relative py-20 md:py-28 lg:py-32">
-          <div className="grid gap-12 items-center lg:grid-cols-[1fr]">
-            <div>
-              <span className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-                World Conference of Mayors, Ghana
-              </span>
-              <motion.h1
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease, delay: 0.1 }}
-                className="mt-6 font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-balance"
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,29,55,0.22)_0%,rgba(10,29,55,0.34)_42%,rgba(10,29,55,0.78)_100%)]" />
+
+        <div className="container-page relative py-12 md:py-24 lg:py-20">
+          <div className="mx-auto max-w-5xl text-center">
+            {/* <span className="inline-flex items-center rounded-full border border-primary-foreground/12 bg-navy/55 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-gold">
+              World Conference of Mayors • Ghana Chapter
+            </span> */}
+
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease, delay: 0.08 }}
+              className="mx-auto mt-6 max-w-4xl text-balance font-display text-[2.15rem] font-extrabold uppercase leading-[0.96] tracking-[-0.04em] sm:text-4xl md:text-5xl lg:text-[4.5rem]"
+            >
+              The Rebirth of <span className="text-gold">Patriotism</span>
+              <br />
+              and <span className="text-gold">Volunteerism</span> in Ghana
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.18 }}
+              className="mx-auto mt-6 max-w-2xl text-base font-medium leading-relaxed text-primary-foreground/90 sm:text-lg"
+            >
+              World Conference of Mayors Ghana - rallying, uniting, and empowering mayors globally.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.24 }}
+              className="mx-auto mt-4 max-w-xl text-sm leading-7 text-primary-foreground/80"
+            >
+              Coordinating transatlantic municipal cooperation, leadership training, and local
+              development programs. Guided by the core mission: To Rally, Unite, and Empower
+              Mayors Globally.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease, delay: 0.32 }}
+              className="mt-9 grid gap-3 sm:flex sm:flex-wrap sm:justify-center"
+            >
+              <a
+                href="/programs"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate("/programs");
+                }}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-gold px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-navy transition-transform hover:scale-[1.02] sm:w-auto"
               >
-                The rebirth of <span className="text-gold">patriotism</span> and{" "}
-                <span className="text-gold">volunteerism</span>, Ghana
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease, delay: 0.25 }}
-                className="mt-6 text-lg text-primary-foreground/85 max-w-xl leading-relaxed"
+                Explore Programme <ArrowRight className="h-4 w-4" />
+              </a>
+              <a
+                href="/contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate("/contact");
+                }}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-primary-foreground/30 bg-navy/20 px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-white hover:text-navy sm:w-auto"
               >
-                A policy-driven platform to rally, unite and empower mayors globally for national
-                transformation, civic responsibility and continental partnership.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease, delay: 0.4 }}
-                className="mt-8 flex flex-wrap gap-2"
-              >
-                <a
-                  href="/programs"
-                  className="inline-flex items-center gap-1 rounded-md bg-gold px-7 py-3.5 text-sm font-semibold text-navy hover:bg-gold/90 transition-colors"
+                Partner With Us <ChevronRight className="h-4 w-4" />
+              </a>
+            </motion.div>
+
+            <div className="mt-10 grid overflow-hidden rounded-2xl border border-primary-foreground/10 bg-navy/72 shadow-[0_18px_40px_-20px_rgba(0,0,0,0.75)] sm:grid-cols-3">
+              {heroStats.map((stat, index) => (
+                <div
+                  key={stat.label}
+                  className={`px-5 py-4 text-center ${index < heroStats.length - 1 ? "border-b border-primary-foreground/10 sm:border-b-0 sm:border-r" : ""}`}
                 >
-                  Explore the Programme
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href="/contact"
-                  className="inline-flex items-center gap-2 rounded-md border border-primary-foreground/30 px-7 py-3.5 text-sm font-semibold hover:bg-primary-foreground/10 transition-colors"
-                >
-                  Partner With Us
-                  <ChevronRight className="h-4 w-4" />
-                </a>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="container-page py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <Reveal>
-            <span className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-              Foreword
-            </span>
-            <h2 className="mt-4 font-display text-4xl font-bold text-navy">
-              Judged by the welfare of our people
-            </h2>
-            <p className="mt-6 text-muted-foreground leading-relaxed">
-              "We shall measure our progress by the improvement in the health of our people; by
-              the number of children in school, and electricity in our towns and villages and by
-              the happiness which our people take in being able to manage their own affairs."
-            </p>
-            <p className="mt-4 text-sm text-muted-foreground">
-              Broadcast to the nation on 24 December 1957 by Osagyefo Dr. Kwame Nkrumah.
-            </p>
-            <div className="mt-10 space-y-5">
-              <p className="text-base text-muted-foreground leading-relaxed">
-                The Ghana chapter aligns the World Conference of Mayors with local priorities,
-                practical service, and the development needs of communities across Ghana.
-              </p>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                The goal is to connect Africa and the diaspora through ideas, expertise,
-                investment, technology, and shared purpose.
-              </p>
-            </div>
-          </Reveal>
-          <div className="relative">
-            <div className="rounded-2xl bg-navy p-8 md:p-10 text-primary-foreground shadow-elegant overflow-hidden">
-              <div className="relative">
-                <span className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-                  Dr. Peter Kwesi Terkper (PhD)
-                </span>
-                <h3 className="mt-4 font-display text-3xl font-bold text-primary-foreground">
-                  Founder & President
-                </h3>
-                <p className="mt-2 text-sm text-primary-foreground/85">
-                  Makane Farmers Connect, Oyarifa, Accra, Ghana
-                </p>
-                <div className="mt-8 h-px w-full bg-primary-foreground/20" />
-                <p className="mt-6 text-sm text-primary-foreground/85 leading-relaxed">
-                  "May this work strengthen our sense of duty to Ghana and to Africans across the
-                  diaspora."
-                </p>
-              </div>
-            </div>
-            <div className="mt-6 grid grid-cols-2 gap-4">
-              {[
-                {
-                  label: "7 T's",
-                  value:
-                    "Trust, Trade, Tourism, Technology, Treasury, Training, Twin-City partnerships",
-                },
-                {
-                  label: "Theme",
-                  value: "A civic leadership platform for public service and local governance",
-                },
-              ].map((x) => (
-                <div key={x.label} className="rounded-xl border border-border bg-background p-4">
-                  <div className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-                    {x.label}
-                  </div>
-                  <div className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                    {x.value}
-                  </div>
+                  <div className="text-2xl font-bold text-gold">{stat.value}</div>
+                  <p className="mt-1 text-[11px] uppercase tracking-[0.16em] text-primary-foreground/72">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         </div>
       </section>
-      <section className="bg-secondary/40 py-24 border-y border-border">
+
+      {/* EDITORIAL ABOUT US SECTION */}
+      <section className="border-t border-steel-blue/15 py-24 bg-white text-navy">
         <div className="container-page">
-          <Reveal className="max-w-2xl">
-            <span className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-              Policy Framework
+          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <Reveal>
+              <span className="font-mono text-xs uppercase tracking-widest text-gold">
+                ( 01 ) Who We Are
+              </span>
+              <h2 className="mt-4 font-display text-3xl font-bold uppercase tracking-tight text-navy md:text-5xl leading-none">
+                Building a legacy of <br />
+                <span className="bg-linear-to-r from-gold to-amber-600 bg-clip-text text-transparent">
+                  civic leadership
+                </span>
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-slate-700 font-serif italic">
+                The World Conference of Mayors, Ghana Chapter brings municipal leadership, civic
+                service, and international collaboration into one focused platform.
+              </p>
+              <div className="mt-8 space-y-6 text-sm text-slate-600 leading-relaxed font-sans">
+                <p>
+                  Established on the belief that mayors and district executives are the public
+                  officials closest to the communities they serve. In Ghana, that principle
+                  translates into a practical policy agenda that links national development to
+                  grassroots volunteerism.
+                </p>
+                <p>
+                  The chapter was incorporated in March 2023 to convene metropolitan, municipal,
+                  and district leaders alongside traditional authorities and civic partners,
+                  driving municipal cooperation across borders.
+                </p>
+              </div>
+            </Reveal>
+            <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+              <img
+                src={johnnyFord}
+                alt="HON. JOHNNY FORD, FOUNDER & CEO"
+                className="h-full w-full object-cover"
+              />
+              <div className="border-t border-border bg-white px-5 py-4 text-center">
+                <div className="text-[0.68rem] uppercase tracking-[0.22em] text-navy/70 font-extrabold">
+                  World Conference of Mayors Inc.
+                </div>
+                <div className="mt-2 text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
+                  Hon. Johnny Ford
+                </div>
+                <div className="mt-1 text-sm font-semibold text-navy">
+                  Founder &amp; CEO, World Conference of Mayors, USA
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* DYNAMIC 7 T'S SHOWCASE (PONDER STYLE) */}
+      <section className="border-t border-steel-blue/15 py-24 bg-[#091526]">
+        <div className="container-page">
+          <Reveal className="max-w-3xl">
+            <span className="font-mono text-xs uppercase tracking-widest text-gold">
+              ( 02 ) Core Philosophy
             </span>
-            <h2 className="mt-4 font-display text-3xl md:text-4xl font-bold text-navy">
-              The missing details, now structured for the web
+            <h2 className="mt-4 font-display text-3xl font-bold uppercase tracking-tight text-white md:text-5xl leading-none">
+              The <span className="bg-linear-to-r from-gold to-amber-500 bg-clip-text text-transparent">7 T's Framework</span>
             </h2>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              This section presents the chapter&apos;s public agenda in a sharper, more accessible
-              web format.
+            <p className="mt-4 text-slate-400 text-sm leading-relaxed">
+              Hover over each principle to explore the core operating logic that guides WCM Ghana's policy agenda and municipal cooperation.
             </p>
           </Reveal>
-          <Stagger className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:items-start">
+            {/* Left list */}
+            <div className="flex flex-col gap-2">
+              {tsDetails.map((item, idx) => (
+                <button
+                  key={item.title}
+                  onMouseEnter={() => setActiveT(idx)}
+                  onClick={() => setActiveT(idx)}
+                  className={`group flex items-center justify-between border-b border-steel-blue/10 py-4 text-left transition-all cursor-pointer ${
+                    activeT === idx ? "text-gold pl-2" : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="font-mono text-xs text-slate-500 group-hover:text-gold transition-colors">
+                      ({String(idx + 1).padStart(2, "0")})
+                    </span>
+                    <span className="font-display text-xl font-bold md:text-2xl transition-transform duration-300 group-hover:translate-x-1">
+                      {item.title}
+                    </span>
+                  </div>
+                  <ChevronRight className={`h-5 w-5 opacity-0 transition-all ${activeT === idx ? "opacity-100 text-gold" : "group-hover:opacity-50 text-slate-400"}`} />
+                </button>
+              ))}
+            </div>
+
+            {/* Right Display Panel */}
+            <div className="sticky top-28">
+              <div className="absolute -inset-1 rounded-2xl bg-linear-to-r from-gold/10 to-steel-blue/10 blur-xl opacity-60" />
+              <div className="relative min-h-[340px] rounded-2xl border border-steel-blue/20 bg-card p-8 shadow-elegant overflow-hidden flex flex-col justify-between">
+                <div className="absolute top-0 right-0 p-4 font-mono text-[9px] text-slate-400 uppercase tracking-widest">
+                  {tsDetails[activeT].tag}
+                </div>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeT}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.22 }}
+                    className="flex flex-col justify-between h-full"
+                  >
+                    <div>
+                      <span className="inline-block rounded-full border border-gold/20 bg-gold/5 px-3 py-1 font-mono text-[9px] uppercase tracking-wider text-gold">
+                        0{activeT + 1} // {tsDetails[activeT].title}
+                      </span>
+                      <h3 className="mt-8 font-display text-3xl font-extrabold text-white uppercase">
+                        {tsDetails[activeT].title}
+                      </h3>
+                      <p className="mt-4 text-base leading-relaxed text-slate-300 font-serif italic">
+                        "{tsDetails[activeT].desc}"
+                      </p>
+                    </div>
+                    <div className="mt-12 pt-6 border-t border-steel-blue/10 flex items-center justify-between">
+                      <span className="text-[10px] text-slate-500 font-mono">WCM GHANA AGENDA</span>
+                      <span className="text-[10px] text-gold font-medium flex items-center gap-1">
+                        Pillar Record
+                      </span>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* POLICY PILLARS SECTION */}
+      <section className="border-t border-steel-blue/15 py-24 bg-slate-50 text-navy">
+        <div className="container-page">
+          <Reveal className="max-w-3xl">
+            <span className="font-mono text-xs uppercase tracking-widest text-gold">
+              ( 03 ) Priority Framework
+            </span>
+            <h2 className="mt-4 font-display text-3xl font-bold uppercase tracking-tight text-navy md:text-5xl leading-none">
+              Framework for <br />
+              <span className="bg-linear-to-r from-gold to-amber-600 bg-clip-text text-transparent">National Transformation</span>
+            </h2>
+            <p className="mt-4 text-slate-600 leading-relaxed text-sm">
+              Our public policy is centered on eight key transformation areas to foster national development, safety, and economic security.
+            </p>
+          </Reveal>
+
+          <Stagger className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: Target, t: "Civic Mobilization", d: "Reawaken patriotism and volunteer participation." },
-              { icon: Users, t: "Capacity Building", d: "Equip leaders with governance tools and training." },
-              { icon: BookOpen, t: "Policy Execution", d: "Turn vision into practical city and district programs." },
-              { icon: Award, t: "National Impact", d: "Scale proven models across districts and borders." },
+              { icon: Flag, title: "Patriotism", desc: "Reawakening national pride, civic duty, and volunteerism as pillars of progress.", tag: "01" },
+              { icon: ShieldCheck, title: "Public Safety", desc: "Enhancing community security, road safety, and coordinated emergency operations.", tag: "02" },
+              { icon: Trees, title: "Environment", desc: "Climate resilience, municipal land restoration, and urban tree-planting initiatives.", tag: "03" },
+              { icon: MapPinned, title: "Migration", desc: "Structured diaspora cooperation and progressive migration governance policies.", tag: "04" },
+              { icon: Heart, title: "Food Security", desc: "Strengthening smallholder farmer welfare, local production, and market systems.", tag: "05" },
+              { icon: GraduationCap, title: "Vocational Training", desc: "Skills development and job pipelines empowering Ghanaian youth to succeed.", tag: "06" },
+              { icon: Handshake, title: "AfCFTA Trade", desc: "Linking local district production with international and regional trade blocks.", tag: "07" },
+              { icon: BadgeCheck, title: "Peace Summit", desc: "Fostering institutional dialogue, reconciliation, and nationwide stability.", tag: "08" },
             ].map((p) => (
-              <StaggerItem key={p.t}>
+              <StaggerItem key={p.title}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  transition={{ type: "spring", stiffness: 250, damping: 20 }}
-                  className="group relative h-full bg-card p-8 rounded-lg hover:border-gold/60 hover:shadow-elegant transition-all"
+                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                  className="group relative flex h-full flex-col justify-between rounded-xl border border-steel-blue/20 bg-white p-6 hover:border-gold transition-all shadow-sm hover:shadow-elegant text-navy"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-md bg-navy text-gold group-hover:bg-gold group-hover:text-navy transition-colors">
-                    <p.icon className="h-5 w-5" />
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-navy/5 text-navy group-hover:bg-gold group-hover:text-white transition-colors">
+                        <p.icon className="h-5 w-5" />
+                      </div>
+                      <span className="font-mono text-[10px] text-slate-400">#{p.tag}</span>
+                    </div>
+                    <h3 className="mt-6 font-display text-lg font-bold uppercase text-navy group-hover:text-gold transition-colors">{p.title}</h3>
+                    <p className="mt-2 text-sm text-slate-600 leading-relaxed">{p.desc}</p>
                   </div>
-                  <h3 className="mt-6 font-display text-lg font-semibold text-navy">{p.t}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.d}</p>
                 </motion.div>
               </StaggerItem>
             ))}
           </Stagger>
         </div>
       </section>
-      <section className="container-page py-24">
-        <Reveal className="max-w-3xl">
-          <span className="text-xs uppercase text-gold font-semibold">7 T&apos;s Framework</span>
-          <h2 className="mt-4 font-display text-3xl md:text-4xl font-bold text-navy">
-            The core operating logic behind the Ghana chapter
-          </h2>
-          <p className="mt-4 text-muted-foreground leading-relaxed">
-            This remains one of the chapter&apos;s clearest identity markers and deserves
-            consistent visibility across the site.
-          </p>
-        </Reveal>
-        <Stagger className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {ts.map((item, index) => (
-            <StaggerItem key={item.title}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                className="h-full rounded-2xl bg-card p-6 shadow-sm transition-all hover:shadow-elegant hover:border-gold/50"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-2xl font-bold text-navy">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="rounded-full bg-gold/15 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.16em] text-gold">
-                    {item.title}
-                  </span>
-                </div>
-                <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-              </motion.div>
-            </StaggerItem>
-          ))}
-        </Stagger>
-      </section>
-      <section className="bg-navy text-primary-foreground py-24">
+
+      {/* INAUGURAL CONFERENCE STEPPER (PONDER STYLE) */}
+      <section className="border-t border-steel-blue/15 py-24 bg-[#091526]">
         <div className="container-page">
-          <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-12 items-start">
+          <div className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
             <Reveal>
-              <span className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-                Inaugural Conference
-              </span>
-              <h2 className="mt-4 font-display text-3xl md:text-4xl font-bold text-balance">
-                A structured event with clear policy outcomes
-              </h2>
-              <p className="mt-5 text-primary-foreground/75 leading-relaxed max-w-xl">
-                The conference programme is presented as a dedicated section so visitors can read
-                the event structure at a glance.
-              </p>
+              <div className="sticky top-28">
+                <span className="font-mono text-xs uppercase tracking-widest text-gold">
+                  ( 04 ) Event Highlights
+                </span>
+                <h2 className="mt-4 font-display text-3xl font-bold uppercase tracking-tight text-white md:text-5xl leading-none">
+                  Inaugural <br />
+                  <span className="bg-linear-to-r from-gold to-amber-500 bg-clip-text text-transparent">Conference</span>
+                </h2>
+                <p className="mt-6 text-sm text-slate-400 leading-relaxed">
+                  A structured retrospective of the founding event that inaugurated WCM in Ghana, outlining the conference agenda and core outputs.
+                </p>
+                <div className="mt-8">
+                  <a
+                    href="/conference"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavigate("/conference");
+                    }}
+                    className="inline-flex items-center gap-2 rounded-full border border-steel-blue/30 bg-white/5 px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-white hover:text-navy hover:border-white cursor-pointer"
+                  >
+                    View Full Details <ChevronRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
             </Reveal>
-            <div className="grid gap-4">
-              {conferenceAgenda.map((item, i) => (
+
+            {/* Stepper list */}
+            <div className="space-y-6">
+              {[
+                { title: "Opening Ceremony", desc: "Arrival of guests, traditional drum call, opening prayers, and welcoming addresses by local mayors and international dignitaries.", step: "01" },
+                { title: "Policy Panel Discussions", desc: "Frontline conversations centering on localizing WCM priorities, developing regional sister-city relationships, and diaspora resource mobilization.", step: "02" },
+                { title: "MMDCE Sharing Session", desc: "District and municipal executives exchanging ideas, practical strategies, and sharing local success stories in governance.", step: "03" },
+                { title: "Keynote Addresses & Citation Dinner", desc: "Speeches from traditional and national leaders, presenting citations to key collaborators, and closing networking dinner.", step: "04" },
+              ].map((item) => (
                 <motion.div
                   key={item.title}
-                  whileHover={{ y: -3 }}
-                  transition={{ type: "spring", stiffness: 220, damping: 20 }}
-                  className="flex gap-4 rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 p-5 md:p-6"
+                  whileHover={{ y: -4 }}
+                  className="group relative flex gap-6 rounded-2xl border border-steel-blue/15 bg-card p-6 hover:border-gold/30 transition-all hover:shadow-elegant"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-gold text-navy font-bold">
-                    0{i + 1}
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-gold/5 font-mono text-sm font-bold text-gold">
+                    {item.step}
                   </div>
                   <div>
-                    <h3 className="font-display text-lg font-bold">{item.title}</h3>
-                    <p className="mt-1 text-sm text-primary-foreground/70 leading-relaxed">
+                    <h3 className="font-display text-lg font-bold uppercase text-white group-hover:text-gold transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-400">
                       {item.desc}
                     </p>
                   </div>
@@ -363,188 +483,147 @@ function HomePage() {
           </div>
         </div>
       </section>
-      <section className="container-page py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+
+      {/* LEADERSHIP SECTION */}
+      <section className="border-t border-steel-blue/15 py-24 bg-white text-navy">
+        <div className="container-page">
           <Reveal>
-            <span className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-              Programme
+            <span className="font-mono text-xs uppercase tracking-widest text-gold">
+              ( 05 ) Governance
             </span>
-            <h2 className="mt-4 font-display text-3xl md:text-4xl font-bold text-navy">
-              From inauguration to measurable impact
+            <h2 className="mt-4 font-display text-3xl font-bold uppercase tracking-tight text-navy md:text-5xl leading-none">
+              Executive <span className="bg-linear-to-r from-gold to-amber-600 bg-clip-text text-transparent">Leadership</span>
             </h2>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              These are the chapter&apos;s recurring priorities, organised here as a clear set of
-              initiatives rather than scattered notes.
+            <p className="mt-4 text-slate-600 text-sm leading-relaxed max-w-2xl">
+              Meet the executive leaders, authors, and international coordinators steering the vision and operations of WCM Ghana.
             </p>
           </Reveal>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {conferenceAgenda.map((item) => (
-              <div key={item.title} className="rounded-xl border border-border bg-background p-5">
-                <div className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-                  {item.title}
-                </div>
-                <div className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                  {item.desc}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <Stagger className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {initiatives.map((p) => (
-            <StaggerItem key={p.title}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ type: "spring", stiffness: 250, damping: 20 }}
-                className="group relative h-full bg-card p-8 rounded-lg hover:border-gold/60 hover:shadow-elegant transition-all"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-md bg-navy text-gold group-hover:bg-gold group-hover:text-navy transition-colors">
-                  <p.icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-6 font-display text-lg font-semibold text-navy">{p.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-              </motion.div>
-            </StaggerItem>
-          ))}
-        </Stagger>
-      </section>
-      <section className="bg-secondary/40 py-24">
-        <div className="container-page grid lg:grid-cols-2 gap-12 items-center">
-          <Reveal>
-            <span className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-              Nationwide Reach
-            </span>
-            <h2 className="mt-4 font-display text-3xl md:text-4xl font-bold text-navy">
-              Serving every region of Ghana
-            </h2>
-            <p className="mt-6 text-base text-muted-foreground leading-relaxed">
-              WCM Ghana works alongside mayors and assemblies across all sixteen regions,
-              translating local insight into national policy and international partnerships.
-            </p>
-            <Stagger className="mt-8 grid grid-cols-2 gap-3 text-sm text-foreground/80" delay={0.05}>
-              {["Greater Accra", "Ashanti", "Western", "Eastern", "Volta", "Northern", "Central", "Bono"].map(
-                (r) => (
-                  <StaggerItem key={r} as="li" className="flex items-center gap-2 list-none">
-                    <span className="h-1.5 w-1.5 rounded-full bg-gold" /> {r}
-                  </StaggerItem>
-                ),
-              )}
-            </Stagger>
-          </Reveal>
-          <div className="relative overflow-hidden rounded-2xl border border-border bg-background p-6 shadow-elegant">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.12),transparent_45%),linear-gradient(180deg,rgba(255,255,255,0.5),transparent)]" />
-            <div className="relative">
-              <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <p className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-                    Ghana Map
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Visual coverage across the nationwide network
-                  </p>
-                </div>
-                <span className="rounded-full bg-navy px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.16em] text-primary-foreground">
-                  16 Regions
-                </span>
-              </div>
-              <img
-                src={ghanaMap}
-                alt="Map of Ghana"
-                className="h-auto w-full rounded-xl object-contain"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="container-page py-24">
-        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
-          <Reveal>
-            <span className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-              Leadership Network
-            </span>
-            <h2 className="mt-4 font-display text-3xl md:text-4xl font-bold text-navy">
-              The people behind the chapter
-            </h2>
-            <p className="mt-5 text-muted-foreground leading-relaxed">
-              These are the key leaders associated with the chapter. Each card pairs the portrait
-              with a concise role description for a cleaner presentation.
-            </p>
-          </Reveal>
-          <div className="grid sm:grid-cols-2 gap-4">
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {leadershipNetwork.map((item) => (
               <figure
                 key={item.name}
-                className="overflow-hidden rounded-xl border border-border bg-card shadow-sm"
+                className="group relative overflow-hidden rounded-2xl border border-steel-blue/20 bg-slate-50 hover:border-gold/30 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-elegant text-navy"
               >
-                <img src={item.image} alt={item.name} className="h-56 w-full object-cover" />
-                <figcaption className="p-4">
-                  <div className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-                    Leadership
-                  </div>
-                  <div className="mt-2 font-display text-lg font-bold text-navy">{item.name}</div>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{item.role}</p>
+                <div className="relative mx-auto mt-8 h-40 w-40 overflow-hidden rounded-full border-4 border-gold/20 bg-white shadow-lg">
+                  <img src={item.image} alt={item.name} className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                </div>
+                <figcaption className="px-6 pb-8 pt-6 text-center">
+                  <div className="font-mono text-[9px] uppercase tracking-widest text-slate-400">WCM Officer</div>
+                  <div className="mt-2 font-display text-lg font-bold text-navy group-hover:text-gold transition-colors">{item.name}</div>
+                  <p className="mt-1.5 text-xs text-slate-600 leading-relaxed">{item.role}</p>
                 </figcaption>
               </figure>
             ))}
           </div>
         </div>
       </section>
-      <section className="bg-secondary/40 py-20">
+
+      {/* REGIONAL MAP SECTION */}
+      <section className="border-t border-steel-blue/15 py-24 bg-[#091526]">
         <div className="container-page">
-          <Reveal className="text-center max-w-2xl mx-auto">
-            <span className="text-[0.74rem] uppercase tracking-[0.18em] text-gold font-extrabold">
-              Partners & Affiliates
+          <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
+            <Reveal>
+              <span className="font-mono text-xs uppercase tracking-widest text-gold">
+                ( 06 ) Spatial Reach
+              </span>
+              <h2 className="mt-4 font-display text-3xl font-bold uppercase tracking-tight text-white md:text-5xl leading-none">
+                Serving every <br />
+                <span className="bg-linear-to-r from-gold to-amber-500 bg-clip-text text-transparent">region of Ghana</span>
+              </h2>
+              <p className="mt-6 text-base text-slate-300 font-serif italic">
+                WCM Ghana operations extend alongside traditional governance councils and municipal assemblies across all sixteen administrative regions.
+              </p>
+              <div className="mt-8 grid grid-cols-2 gap-4">
+                {["Greater Accra", "Ashanti", "Western", "Eastern", "Volta", "Northern", "Central", "Bono"].map((reg) => (
+                  <div key={reg} className="flex items-center gap-2 text-sm text-slate-400 font-mono">
+                    <span className="h-1.5 w-1.5 rounded-full bg-gold" /> {reg}
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            {/* Ghana Map Display */}
+            <div className="relative">
+              <div className="absolute -inset-1 rounded-3xl bg-gold/5 blur-xl" />
+              <div className="relative overflow-hidden rounded-2xl border border-steel-blue/20 bg-card p-6 shadow-elegant">
+                <div className="mb-4 flex items-center justify-between">
+                  <div>
+                    <h3 className="font-mono text-xs uppercase tracking-widest text-slate-400">Regional Coverage</h3>
+                    <p className="text-[10px] text-slate-500">16 Administrative Regions</p>
+                  </div>
+                  <span className="rounded-full border border-gold/30 bg-gold/5 px-2.5 py-0.5 font-mono text-[9px] text-gold uppercase tracking-wider">
+                    National Map
+                  </span>
+                </div>
+                <img src={ghanaMap} alt="Ghana Map WCM coverage" className="h-auto w-full max-h-[360px] rounded-xl object-contain opacity-85 hover:opacity-100 transition-opacity pointer-events-none" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PARTNERS SECTION */}
+      <section className="border-t border-steel-blue/15 py-24 bg-slate-50 text-navy">
+        <div className="container-page">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="font-mono text-xs uppercase tracking-widest text-gold">
+              ( 07 ) Affiliates
             </span>
-            <h2 className="mt-3 font-display text-3xl font-bold text-navy">
-              Working together for transformation
+            <h2 className="mt-4 font-display text-3xl font-bold uppercase tracking-tight text-navy md:text-4xl leading-none">
+              Transformational <span className="bg-linear-to-r from-gold to-amber-600 bg-clip-text text-transparent">Partners</span>
             </h2>
-          </Reveal>
-          <Stagger className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+            <p className="mt-2 text-slate-500 text-xs font-mono">Working together across sectors</p>
+          </div>
+
+          <Stagger className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
             {partners.map((p) => (
               <StaggerItem key={p.name}>
-                <motion.div
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 250, damping: 18 }}
-                  className="flex flex-col items-center text-center rounded-lg p-6 h-full hover:border-gold/60 hover:shadow-elegant transition-colors"
-                >
-                  <img src={p.src} alt={p.name} className="h-24 w-auto object-contain" />
-                </motion.div>
+                <div className="group flex h-36 flex-col items-center justify-center rounded-xl border border-steel-blue/20 bg-white p-4 transition-all duration-300 hover:border-gold hover:shadow-elegant hover:-translate-y-1">
+                  <img src={p.src} alt={p.name} className="h-20 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-500" />
+                </div>
               </StaggerItem>
             ))}
           </Stagger>
         </div>
       </section>
+
+      {/* CALL TO ACTION */}
       <section className="container-page py-24">
         <Reveal>
-          <div className="relative overflow-hidden rounded-2xl bg-navy p-12 md:p-20 text-primary-foreground">
-            <motion.img
-              src={cityscape}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover opacity-20"
-              initial={{ scale: 1.1 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.4, ease }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-transparent" />
+          <div className="relative overflow-hidden rounded-3xl border border-steel-blue/20 bg-navy p-12 md:p-20 text-white">
+            <img src={cityscape} alt="Accra skyline" className="absolute inset-0 h-full w-full object-cover opacity-10 grayscale pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-r from-navy via-navy/95 to-transparent" />
+            
             <div className="relative max-w-2xl">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-balance">
-                Join the global mayoral movement
+              <span className="font-mono text-xs uppercase tracking-widest text-gold block mb-2">
+                Join WCM Ghana
+              </span>
+              <h2 className="font-display text-3xl font-extrabold uppercase tracking-tight md:text-5xl leading-none">
+                Empower your <br />
+                <span className="bg-linear-to-r from-gold to-amber-500 bg-clip-text text-transparent">local community</span>
               </h2>
-              <p className="mt-5 text-lg text-primary-foreground/85 leading-relaxed">
-                Whether you lead a city, serve a community, or believe in transformative
-                governance, there is a place for you in WCM Ghana.
+              <p className="mt-6 text-base leading-relaxed text-slate-300">
+                Partner with municipal leaders, build sister-city ties, and cooperate across borders to scale local public impact.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-md bg-gold px-7 py-3.5 text-sm font-semibold text-navy hover:bg-gold/90 shadow-gold transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate("/contact");
+                  }}
+                  className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-navy transition-transform hover:scale-[1.02] shadow-gold hover:shadow-xl cursor-pointer"
                 >
                   Become a Member <ChevronRight className="h-4 w-4" />
                 </a>
                 <a
                   href="/about"
-                  className="inline-flex items-center gap-2 rounded-md border border-primary-foreground/30 px-7 py-3.5 text-sm font-semibold hover:bg-primary-foreground/10 transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate("/about");
+                  }}
+                  className="inline-flex items-center gap-2 rounded-full border border-steel-blue/30 bg-white/5 px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-white hover:text-navy hover:border-white cursor-pointer"
                 >
                   Learn More
                 </a>

@@ -1,5 +1,5 @@
-import { motion, useScroll, useSpring, AnimatePresence, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
+import { motion, useScroll, AnimatePresence, type Variants } from "framer-motion";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -7,6 +7,7 @@ export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
 };
+
 
 export function Reveal({
   children,
@@ -76,14 +77,31 @@ export function StaggerItem({
 
 export function ScrollProgress() {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 24, mass: 0.3 });
+  const [activeTick, setActiveTick] = useState(0);
+  const totalTicks = 35;
+
+  useEffect(() => {
+    return scrollYProgress.on("change", (latest) => {
+      const activeIndex = Math.min(
+        Math.floor(latest * totalTicks),
+        totalTicks - 1
+      );
+      setActiveTick(activeIndex);
+    });
+  }, [scrollYProgress]);
+
   return (
-    <motion.div
-      style={{ scaleX }}
-      className="fixed left-0 right-0 top-0 z-[60] h-[3px] origin-left bg-gold"
-    />
+    <div className="ruler-progress">
+      <div className="ruler-track" />
+      <div className="ruler-marks">
+        {Array.from({ length: totalTicks }).map((_, i) => (
+          <span key={i} className={i <= activeTick ? "active" : ""} />
+        ))}
+      </div>
+    </div>
   );
 }
+
 
 export function PageTransition({ children }: { children: ReactNode }) {
   return (

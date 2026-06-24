@@ -1,21 +1,19 @@
 import { PageHeader } from "./PageHeader";
-import { assetUrl } from "@/lib/assetUrl";
-import wcmBackground from "@/assets/hero-bg.small.png";
-import wcmHeadquarters from "@/assets/wcmgh_headequarters_building.small.png";
-import panelMC from "@/assets/Dr. Owusuaa Eshia.small.png";
-import panelNiine from "@/assets/Hon. Francis Akumatey Addo.small.png";
-import panelGloria from "@/assets/Mr. Michael Kpakpo Allotey.small.png";
-import panelStrategic from "@/assets/Hon. Abraham Dwuma Odoom.small.png";
-import mahama from "@/assets/H. E. JOHN DRAMANI MAHAMA.small.png";
-import naana from "@/assets/H.E. NAANA JANE OPOKU-AGYEMANG. PHD, FGA.small.png";
+import { motion } from "framer-motion";
+import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.small.png";
+import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.small.png";
 import terkper from "@/assets/Dr. Peter Kwesi Terkper.small.png";
+import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.small.png";
 import mbengue from "@/assets/Dr. Abdoulaye Mbengue.small.png";
 import fayeWilliams from "@/assets/Amb. Dr. E. Faye Williams.small.png";
 import jimmieGardener from "@/assets/Hon. Jimmie Gardener.small.png";
 import frankJackson from "@/assets/Mr. Mayor Frank Jackson.small.png";
-import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.small.png";
-import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.small.png";
-import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.small.png";
+import mahama from "@/assets/H. E. JOHN DRAMANI MAHAMA.small.png";
+import naana from "@/assets/H.E. NAANA JANE OPOKU-AGYEMANG. PHD, FGA.small.png";
+import panelMC from "@/assets/Dr. Owusuaa Eshia.small.png";
+import panelNiine from "@/assets/Hon. Francis Akumatey Addo.small.png";
+import panelGloria from "@/assets/Mr. Michael Kpakpo Allotey.small.png";
+import panelStrategic from "@/assets/Hon. Abraham Dwuma Odoom.small.png";
 
 const leadership = [
   { src: johnnyFord, title: "Hon. Johnny Ford", caption: "Founder and Chief Executive Officer, World Conference of Mayors, USA." },
@@ -26,8 +24,8 @@ const leadership = [
   { src: fayeWilliams, title: "Amb. Dr. E. Faye Williams", caption: "Member of the WCM Board, USA." },
   { src: jimmieGardener, title: "Hon. Jimmie Gardener", caption: "President, World Conference of Mayors, USA." },
   { src: frankJackson, title: "Mr. Mayor Frank Jackson", caption: "Vice President for International Affairs, USA." },
-  { src: mahama, title: "H. E. John Dramani Mahama", caption: "President of the Republic of Ghana." },
-  { src: naana, title: "H. E. Naana Jane Opoku-Agyemang", caption: "Vice President of the Republic of Ghana." },
+  { src: mahama, title: "H. E. John Dramani Mahama", caption: "Former President of the Republic of Ghana." },
+  { src: naana, title: "H. E. Naana Jane Opoku-Agyemang", caption: "Distinguished Academic & Political Leader, Ghana." },
 ];
 
 const programme = [
@@ -37,50 +35,52 @@ const programme = [
   { src: panelStrategic, title: "Strategic dialogue", caption: "A participant portrait associated with the event's policy discussion." },
 ];
 
-const institutional = [
-  { src: wcmBackground, title: "WCM Ghana background", caption: "The background treatment used to frame the chapter's visual identity." },
-  { src: wcmHeadquarters, title: "Proposed headquarters", caption: "The headquarters concept presented in the chapter materials." },
-];
-
 export function GalleryPage() {
   return (
     <>
-      <PageHeader eyebrow="Gallery" title="A curated visual archive of WCM Ghana" subtitle="Portraits, programme imagery, and institutional visuals are arranged into a cleaner editorial format." />
-      <section className="container-page py-20">
+      <PageHeader eyebrow="Gallery" title="A curated visual archive of WCM Ghana" subtitle="Portraits, programme imagery, and institutional visuals are arranged into an elegant, high-contrast grid layout." />
+      
+      {/* Executive Portraits */}
+      <section className="container-page py-20 bg-white text-navy">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">Leadership</span>
-            <h2 className="mt-4 font-display text-3xl font-bold text-navy md:text-4xl">Executive </h2>
+            <span className="font-mono text-xs uppercase tracking-widest text-gold">( Roster )</span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-none tracking-tight text-navy md:text-4xl">Executive & Board Members</h2>
           </div>
-          {/* <p className="max-w-md text-sm leading-7 text-muted-foreground">
-            Each portrait is paired with a concise professional caption to keep the presentation clean and easy to scan.
-          </p> */}
         </div>
+        
         <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {leadership.map((item) => (
-            <figure key={item.title} className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-elegant">
-              <img src={item.src} alt={item.title} className="h-72 w-full object-cover" />
+            <figure key={item.title} className="group overflow-hidden rounded-2xl border border-steel-blue/20 bg-slate-50 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-elegant text-navy">
+              <div className="relative h-80 w-full overflow-hidden">
+                <img src={item.src} alt={item.title} className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+              </div>
               <figcaption className="p-5">
-                <h3 className="font-display text-xl font-bold text-navy">{item.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">{item.caption}</p>
+                <h3 className="font-display text-lg font-bold uppercase text-navy group-hover:text-gold transition-colors">{item.title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600 font-serif italic">"{item.caption}"</p>
               </figcaption>
             </figure>
           ))}
         </div>
       </section>
-      <section className="border-y border-border bg-secondary/30 py-20">
+
+      {/* Conference Moderators */}
+      <section className="border-t border-steel-blue/15 bg-[#091526] py-20">
         <div className="container-page">
           <div className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">Programme</span>
-            <h2 className="mt-4 font-display text-3xl font-bold text-navy md:text-4xl">Conference moderators</h2>
+            <span className="font-mono text-xs uppercase tracking-widest text-gold">( Dialogue Leads )</span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-none tracking-tight text-white md:text-4xl">Conference moderators</h2>
           </div>
+          
           <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {programme.map((item) => (
-              <figure key={item.title} className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-                <img src={item.src} alt={item.title} className="h-64 w-full object-cover" />
+              <figure key={item.title} className="group overflow-hidden rounded-2xl border border-steel-blue/15 bg-card shadow-sm hover:border-gold/20 transition-all duration-300">
+                <div className="relative h-64 w-full overflow-hidden">
+                  <img src={item.src} alt={item.title} className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                </div>
                 <figcaption className="p-5">
-                  <h3 className="font-display text-xl font-bold text-navy">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-muted-foreground">{item.caption}</p>
+                  <h3 className="font-display text-base font-bold uppercase text-white group-hover:text-gold transition-colors">{item.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-400">{item.caption}</p>
                 </figcaption>
               </figure>
             ))}
@@ -90,3 +90,4 @@ export function GalleryPage() {
     </>
   );
 }
+

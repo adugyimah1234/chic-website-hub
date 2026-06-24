@@ -1,5 +1,6 @@
-import { CalendarDays, Users, Presentation, Award, MapPinned, Sparkles } from "lucide-react";
+import { CalendarDays, Users, Presentation, Award } from "lucide-react";
 import { PageHeader } from "./PageHeader";
+import { motion } from "framer-motion";
 import moderatorKenneth from "@/assets/Hon. Kenneth Kabu Kanor.small.png";
 import moderatorFrancis from "@/assets/Hon. Francis Akumatey Addo.small.png";
 import moderatorAllotey from "@/assets/Mr. Michael Kpakpo Allotey.small.png";
@@ -8,10 +9,10 @@ import headquarters from "@/assets/wcmgh_headequarters_building.small.png";
 import wcmBanner from "@/assets/wmcgh banner.small.png";
 
 const agenda = [
-  { icon: CalendarDays, title: "Opening Session", desc: "Formal welcome, opening remarks, and introduction of the principal dignitaries and partners." },
-  { icon: Presentation, title: "Policy Presentations", desc: "Structured presentations on the WCM framework, priorities, and the Ghana chapter's mandate." },
-  { icon: Users, title: "Leadership Dialogue", desc: "A moderated exchange on governance, local development, and collaboration across institutions." },
-  { icon: Award, title: "Recognition", desc: "Citations and acknowledgements for individuals whose support advanced the chapter's formation." },
+  { icon: CalendarDays, title: "Opening Session", desc: "Formal welcome, traditional music performance, opening prayers, and introduction of international and local dignitaries." },
+  { icon: Presentation, title: "Policy Presentations", desc: "Structured discussions and presentations outlining the WCM mandate, 7 T's framework, and the Ghana chapter's vision." },
+  { icon: Users, title: "Leadership Dialogue", desc: "A moderated panel exchange between district chief executives, traditional authorities, and global partners." },
+  { icon: Award, title: "Recognition & Dinner", desc: "Awarding citations of honor to key individuals supporting the establishment of WCM Ghana, followed by networking." },
 ];
 
 const moderators = [
@@ -25,104 +26,118 @@ export function ConferencePage() {
   return (
     <>
       <PageHeader eyebrow="Conference" title="The inaugural WCM Ghana conference" subtitle="A formal record of the chapter's founding event, including the programme outline, key participants, and institutional imagery." />
-      <section className="container-page py-20">
+      
+      {/* Event Overview */}
+      <section className="container-page py-20 bg-white text-navy">
         <div className="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">Event summary</span>
-            <h2 className="mt-4 font-display text-4xl font-bold text-navy md:text-5xl">A clear and dignified presentation of the founding conference</h2>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground">This page presents the inaugural conference in a formal, editorial style.</p>
+            <span className="font-mono text-xs uppercase tracking-widest text-gold">( Event Summary )</span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-none tracking-tight text-navy md:text-5xl">A clear and dignified policy convening</h2>
+            <p className="mt-6 text-base leading-relaxed text-slate-600 font-serif italic">This retrospective records the inaugural policy conference held to formally launch WCM in Ghana.</p>
+            
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
               {[
-                ["Date", "Founding conference record"],
-                ["Focus", "Policy, leadership, and partnership"],
-                ["Venue", "Accra, Ghana"],
-                ["Theme", "Patriotism and volunteerism"],
+                ["Session", "Founding conference record"],
+                ["Topic", "Policy, leadership, and partnership"],
+                ["Venue Location", "Accra, Ghana"],
+                ["Operating Theme", "Patriotism and volunteerism"],
               ].map(([label, value]) => (
-                <div key={label} className="rounded-2xl border border-border bg-card p-5">
-                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">{label}</div>
+                <div key={label} className="rounded-2xl border border-steel-blue/20 bg-slate-50 p-5 shadow-sm">
+                  <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</div>
                   <div className="mt-2 text-base font-semibold text-navy">{value}</div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="grid gap-4">
-            <div className="overflow-hidden rounded-3xl border border-border bg-card">
-              <img src={headquarters} alt="WCM Ghana headquarters" className="h-125 w-full object-cover md:h-95" />
-            </div>
+          
+          <div className="relative overflow-hidden rounded-2xl border border-steel-blue/20 bg-white p-3 shadow-elegant">
+            <img src={headquarters} alt="WCM Ghana headquarters" className="h-96 w-full rounded-xl object-cover grayscale hover:grayscale-0 transition-all duration-500" />
           </div>
         </div>
       </section>
-      <section className="border-y border-border bg-secondary/30 py-20">
+
+      {/* Programme Steps */}
+      <section className="border-y border-steel-blue/15 bg-[#091526] py-20">
         <div className="container-page">
           <div className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">Programme</span>
-            <h2 className="mt-4 font-display text-3xl font-bold text-navy md:text-4xl">Conference programme highlights</h2>
+            <span className="font-mono text-xs uppercase tracking-widest text-gold">( Event Schedule )</span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-none tracking-tight text-white md:text-4xl">Conference programme highlights</h2>
           </div>
-          <div className="mt-12 grid gap-5 lg:grid-cols-2">
+          
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {agenda.map((item, index) => (
-              <article key={item.title} className="group rounded-2xl border border-border bg-card p-6 transition-transform duration-300 hover:-translate-y-1 hover:shadow-elegant">
+              <motion.article 
+                key={item.title} 
+                whileHover={{ y: -3 }}
+                className="group rounded-2xl border border-steel-blue/15 bg-card p-6 hover:border-gold/30 hover:shadow-elegant transition-colors"
+              >
                 <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-navy text-gold">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-navy text-gold group-hover:bg-gold group-hover:text-navy transition-colors">
                     <item.icon className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">Step {index + 1}</div>
-                    <h3 className="mt-1 font-display text-2xl font-bold text-navy">{item.title}</h3>
+                    <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">Step 0{index + 1}</div>
+                    <h3 className="mt-1 font-display text-xl font-bold uppercase text-white group-hover:text-gold transition-colors">{item.title}</h3>
                   </div>
                 </div>
-                <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground">{item.desc}</p>
-              </article>
+                <p className="mt-4 text-sm leading-relaxed text-slate-400">{item.desc}</p>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
-      <section className="container-page py-20">
+
+      {/* Moderators List */}
+      <section className="container-page py-20 bg-white text-navy">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">Leadership</span>
-            <h2 className="mt-4 font-display text-3xl font-bold text-navy md:text-4xl">Key participants and moderators</h2>
+            <span className="font-mono text-xs uppercase tracking-widest text-gold">( Moderators )</span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-none tracking-tight text-navy md:text-4xl">Key participants and moderators</h2>
           </div>
-          <div className="inline-flex items-center gap-2 self-start rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-muted-foreground">
-            <Sparkles className="h-4 w-4 text-gold" />
-            Visual record from the conference
+          <div className="inline-flex items-center gap-2 self-start rounded-full border border-steel-blue/20 bg-slate-50 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-600">
+            Official Conference Roster
           </div>
         </div>
+        
         <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {moderators.map((item) => (
-            <figure key={item.label} className="overflow-hidden rounded-2xl border border-border bg-card">
-              <img src={item.src} alt={item.label} className="h-72 w-full object-cover" />
-              <figcaption className="space-y-1 p-5">
-                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Moderator</div>
-                <h3 className="font-display text-xl font-bold text-navy">{item.label}</h3>
+            <figure key={item.label} className="group overflow-hidden rounded-2xl border border-steel-blue/20 bg-slate-50 hover:border-gold transition-all duration-300 hover:-translate-y-1.5 hover:shadow-elegant">
+              <img src={item.src} alt={item.label} className="h-72 w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+              <figcaption className="space-y-1 p-5 text-center">
+                <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">Moderator</div>
+                <h3 className="font-display text-lg font-bold text-navy group-hover:text-gold transition-colors">{item.label}</h3>
               </figcaption>
             </figure>
           ))}
         </div>
       </section>
-      <section className="border-t border-border bg-secondary/20 py-20">
+
+      {/* Venue Context */}
+      <section className="border-t border-steel-blue/15 bg-[#091526] py-20">
         <div className="container-page">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">Venue</span>
-              <h2 className="mt-4 font-display text-3xl font-bold text-navy md:text-4xl">A conference identity rooted in place</h2>
-              <p className="mt-5 text-muted-foreground leading-relaxed">
-                The headquarters and banner imagery provide the institutional context for the chapter.
+              <span className="font-mono text-xs uppercase tracking-widest text-gold">( Context )</span>
+              <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-none tracking-tight text-white md:text-4xl">A conference identity rooted in place</h2>
+              <p className="mt-5 text-sm text-slate-300 font-serif italic leading-relaxed">
+                The WCM Ghana headquarters and event banner graphics provide structural context to the chapter's official launch.
               </p>
             </div>
+            
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="overflow-hidden rounded-3xl border border-border bg-card md:row-span-2">
-                <img src={headquarters} alt="WCM Ghana headquarters" className="h-full min-h-[320px] w-full object-cover" />
+              <div className="overflow-hidden rounded-2xl border border-steel-blue/15 bg-card md:row-span-2 p-1">
+                <img src={headquarters} alt="WCM Ghana headquarters" className="h-full min-h-[300px] w-full rounded-xl object-cover grayscale hover:grayscale-0 transition-all duration-500" />
               </div>
-              <div className="overflow-hidden rounded-3xl border border-border bg-card">
-                <img src={wcmBanner} alt="WCM Ghana banner" className="h-56 w-full object-cover" />
+              <div className="overflow-hidden rounded-2xl border border-steel-blue/15 bg-card p-1">
+                <img src={wcmBanner} alt="WCM Ghana banner" className="h-44 w-full rounded-xl object-cover grayscale hover:grayscale-0 transition-all duration-500" />
               </div>
-              <div className="rounded-3xl border border-border bg-navy p-6 text-primary-foreground">
-                <div className="flex items-center gap-3 text-gold">
+              <div className="rounded-2xl border border-steel-blue/15 bg-card p-6 text-white shadow-sm flex flex-col justify-between">
+                <div className="flex items-center gap-2 text-gold">
                   <Award className="h-5 w-5" />
-                  <span className="text-xs font-semibold uppercase tracking-[0.24em]">Outcome</span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest">Outcomes</span>
                 </div>
-                <p className="mt-4 text-sm leading-7 text-primary-foreground/85">
-                  The conference established the chapter&apos;s public identity and clarified its mandate.
+                <p className="mt-4 text-xs leading-relaxed text-slate-400">
+                  The event successfully established the local executive council and ratified WCM Ghana's developmental roadmap.
                 </p>
               </div>
             </div>
@@ -132,3 +147,4 @@ export function ConferencePage() {
     </>
   );
 }
+

@@ -1,4 +1,5 @@
 import { PageHeader } from "./PageHeader";
+import { motion } from "framer-motion";
 import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.small.png";
 import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.small.png";
 import terkper from "@/assets/Dr. Peter Kwesi Terkper.small.png";
@@ -9,9 +10,9 @@ import jimmieGardener from "@/assets/Hon. Jimmie Gardener.small.png";
 import frankJackson from "@/assets/Mr. Mayor Frank Jackson.small.png";
 
 const leaders = [
-  { name: "Mayor Johnny Ford", role: "Founder and Chief Executive Officer", since: "Since 1984", bio: "Founder of the World Conference of Mayors and a long-standing advocate for municipal leadership and Pan-African collaboration.", image: johnnyFord },
-  { name: "Francis Opai Tetteh", role: "Country Director, Ghana", since: "Ghana Chapter", bio: "Leads the strategic direction and operations of WCM Ghana.", image: francisOpaiTetteh },
-  { name: "Dr. Peter Kwesi Terkper", role: "Founder and President", since: "Makane Farmers Connect", bio: "Policy author and convener who helped shape the chapter's development agenda.", image: terkper },
+  { name: "Mayor Johnny Ford", role: "Founder and Chief Executive Officer", since: "WCM Founder Since 1984", bio: "Founder of the World Conference of Mayors and a long-standing advocate for municipal leadership and Pan-African collaboration.", image: johnnyFord },
+  { name: "Francis Opai Tetteh", role: "Country Director, WCM Ghana", since: "Ghana Chapter", bio: "Leads the strategic direction, international coordination, and operations of WCM Ghana.", image: francisOpaiTetteh },
+  { name: "Dr. Peter Kwesi Terkper", role: "Finance and Strategic convenor", since: "Makane Farmers Connect", bio: "Policy author and convener whose strategic support helped shape the chapter's economic development agenda.", image: terkper },
 ];
 
 const honorees = [
@@ -26,36 +27,47 @@ export function LeadershipPage() {
   return (
     <>
       <PageHeader eyebrow="Leadership" title="The people behind the mission" subtitle="A coalition of leaders, scholars, and partners committed to practical public service." />
-      <section className="container-page py-20">
-        <h2 className="font-display text-3xl font-bold text-navy">Executive leadership</h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      
+      {/* Executive Leadership Grid */}
+      <section className="container-page py-20 bg-white text-navy">
+        <span className="font-mono text-xs uppercase tracking-widest text-gold">( Executives )</span>
+        <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-none tracking-tight text-navy md:text-4xl">Executive leadership</h2>
+        
+        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {leaders.map((leader) => (
-            <article key={leader.name} className="overflow-hidden rounded-xl bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-elegant">
-              <img src={leader.image} alt={leader.name} className="h-72 w-full object-cover" />
+            <article key={leader.name} className="group overflow-hidden rounded-2xl border border-steel-blue/20 bg-slate-50 hover:border-gold transition-all duration-300 hover:-translate-y-1.5 hover:shadow-elegant text-navy">
+              <div className="relative h-72 w-full overflow-hidden">
+                <img src={leader.image} alt={leader.name} className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+              </div>
               <div className="p-6">
-                <div className="text-xs font-semibold uppercase text-gold">{leader.since}</div>
-                <h3 className="mt-3 font-display text-2xl font-bold text-navy">{leader.name}</h3>
-                <p className="mt-1 text-sm font-semibold text-muted-foreground">{leader.role}</p>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{leader.bio}</p>
+                <div className="font-mono text-[9px] uppercase tracking-widest text-gold">{leader.since}</div>
+                <h3 className="mt-3 font-display text-xl font-bold uppercase text-navy group-hover:text-gold transition-colors">{leader.name}</h3>
+                <p className="mt-1 font-mono text-[10px] text-slate-500">{leader.role}</p>
+                <p className="mt-4 text-sm leading-relaxed text-slate-600 font-serif italic">"{leader.bio}"</p>
               </div>
             </article>
           ))}
         </div>
       </section>
-      <section className="border-y border-border bg-secondary/40 py-20">
+
+      {/* Honorees Grid */}
+      <section className="border-t border-steel-blue/15 bg-[#091526] py-20">
         <div className="container-page">
           <div className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase text-gold">Honorees</span>
-            <h2 className="mt-4 font-display text-3xl font-bold text-navy">Recognising the people who supported the chapter</h2>
+            <span className="font-mono text-xs uppercase tracking-widest text-gold">( Citations )</span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold uppercase leading-none tracking-tight text-white md:text-4xl">Recognising the founding support</h2>
           </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
+          
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {honorees.map((item) => (
-              <article key={item.name} className="overflow-hidden rounded-xl bg-card shadow-sm transition-all hover:shadow-elegant">
-                <img src={item.image} alt={item.name} className="h-64 w-full object-cover" />
+              <article key={item.name} className="group overflow-hidden rounded-2xl border border-steel-blue/15 bg-card hover:border-gold/30 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-elegant">
+                <div className="relative h-64 w-full overflow-hidden">
+                  <img src={item.image} alt={item.name} className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                </div>
                 <div className="p-6">
-                  <div className="text-xs font-semibold uppercase text-gold">{item.title}</div>
-                  <h3 className="mt-3 font-display text-2xl font-bold text-navy">{item.name}</h3>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+                  <div className="font-mono text-[9px] uppercase tracking-widest text-gold">{item.title}</div>
+                  <h3 className="mt-3 font-display text-xl font-bold uppercase text-white group-hover:text-gold transition-colors">{item.name}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-400 font-serif italic">"{item.text}"</p>
                 </div>
               </article>
             ))}
@@ -65,3 +77,4 @@ export function LeadershipPage() {
     </>
   );
 }
+
