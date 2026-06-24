@@ -1,8 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { Menu, X, Mail, Phone, MapPin } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import logo from "@/assets/logo.png.asset.json";
-import { assetUrl } from "@/lib/assetUrl";
+import logo from "@/assets/logo.png";
 import { PageTransition, ScrollProgress } from "./Motion";
 import { Toaster } from "./ui/sonner";
 
@@ -33,7 +32,7 @@ function Logo({
       }}
     >
       <motion.img
-        src={assetUrl(logo)}
+        src={logo}
         alt="WCM Ghana"
         width={56}
         height={56}

@@ -12,21 +12,20 @@ import cityscape from "@/assets/cityscape.small.png";
 import ministry from "@/assets/ministry-lg.small.png";
 import economy from "@/assets/24hour-economy.small.png";
 import migration from "@/assets/holistic-migration.small.png";
-import farmers from "@/assets/makane-farmers.png.asset.json";
+import farmers from "@/assets/makane_farmers_connect.small.png";
 import johnnyFord from "@/assets/HON. JOHNNY FORD, FOUNDER & CEO.small.png";
 import francisOpaiTetteh from "@/assets/HON. FRANCIS OPAI TETTEH.small.png";
 import terkper from "@/assets/Dr. Peter Kwesi Terkper.small.png";
 import wakeelahMartinez from "@/assets/Queen Mother Wakeelah Martinez.small.png";
 import ghanaMap from "@/assets/ghanamap.small.png";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
-import { assetUrl } from "@/lib/assetUrl";
 import { useEffect, useState, type JSX } from "react";
 
 const partners = [
   { src: ministry, name: "Ministry of Local Government, Chieftaincy & Religious Affairs" },
   { src: economy, name: "24 Hour Economy" },
   { src: migration, name: "Holistic Migration Consult" },
-  { src: assetUrl(farmers), name: "Makane Farmers Connect" },
+  { src: farmers, name: "Makane Farmers Connect" },
 ];
 const ease = [0.22, 1, 0.36, 1] as const;
 const initiatives = [

@@ -1,6 +1,5 @@
 import drivingForce from "@/assets/driving-force.small.png";
-import accra from "@/assets/headquarters.png.asset.json";
-import { assetUrl } from "@/lib/assetUrl";
+import accra from "@/assets/wcmgh_headequarters_building.small.png";
 import { PageHeader } from "./PageHeader";
 
 export function AboutPage() {
@@ -75,7 +74,7 @@ export function AboutPage() {
       </section>
       <section className="container-page py-20">
         <div className="grid gap-12 items-center lg:grid-cols-2">
-          <img src={assetUrl(accra)} alt="WCM Ghana Headquarters" loading="lazy" className="w-full rounded-lg shadow-elegant" />
+          <img src={accra} alt="WCM Ghana Headquarters" loading="lazy" className="w-full rounded-lg shadow-elegant" />
           <div>
             <span className="text-xs font-semibold uppercase text-gold">Headquarters</span>
             <h2 className="mt-4 font-display text-4xl font-bold text-navy">Africa&apos;s gateway to mayoral diplomacy</h2>
