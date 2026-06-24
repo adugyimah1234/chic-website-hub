@@ -7,16 +7,18 @@ import { PageTransition, ScrollProgress } from "./Motion";
 import { Toaster } from "./ui/sonner";
 
 const nav = [
-  { href: "#home", label: "Home" },
-  { href: "#conference", label: "Conference" },
-  { href: "#leadership", label: "Leadership" },
-  { href: "#programs", label: "Programs" },
-  { href: "#contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/conference", label: "Conference" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/about", label: "About" },
+  { href: "/leadership", label: "Leadership" },
+  { href: "/programs", label: "Programs" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 function Logo({ variant = "light" }: { variant?: "light" | "dark" }) {
   return (
-    <a href="#home" className="group flex items-center gap-3">
+    <a href="/" className="group flex items-center gap-3">
       <motion.img
         src={assetUrl(logo)}
         alt="WCM Ghana"
@@ -44,8 +46,7 @@ function Logo({ variant = "light" }: { variant?: "light" | "dark" }) {
 
 function NavLink({ href, label }: { href: string; label: string }) {
   return (
-    <a
-      href={href}
+      <a href={href}
       className="group relative rounded-md px-4 py-2 text-sm font-medium text-foreground/75 transition-colors hover:text-navy"
     >
       <span className="relative z-10">{label}</span>
@@ -84,8 +85,8 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               <NavLink key={n.href} href={n.href} label={n.label} />
             ))}
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.96 }}>
-              <a
-                href="#contact"
+                <a
+                href="/contact"
                 className="ml-3 inline-flex items-center rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md shadow-navy/20 transition-colors hover:bg-navy-light"
               >
                 Get Involved
@@ -129,8 +130,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.04 * i, duration: 0.3 }}
                   >
-                    <a
-                      href={n.href}
+                      <a href={n.href}
                       onClick={() => setOpen(false)}
                       className="block border-b border-border/50 py-3 text-sm font-medium text-foreground/80"
                     >
