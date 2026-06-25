@@ -37,7 +37,7 @@ export function Logo({
           WCM
         </div>
         <div
-          className={`font-display text-[9px] font-semibold uppercase tracking-[0.14em] ${
+          className={`font-display text-[6px] font-semibold uppercase ${
             isDark ? "text-gold" : "text-slate-500"
           }`}
         >

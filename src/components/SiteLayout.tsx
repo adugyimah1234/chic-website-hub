@@ -24,8 +24,11 @@ export function SiteLayout({
       <ScrollProgress />
 
       <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white shadow-sm">
-        <div className="container-page grid h-[4.75rem] grid-cols-[1fr_auto_1fr] items-center gap-4 py-3">
+        <div className="container-page grid h-19 grid-cols-[1fr_auto_1fr] items-center gap-4 py-3">
+          <div>
+
           <Logo onNavigate={onNavigate} />
+          </div>
           <DesktopNav pathname={pathname} onNavigate={onNavigate} />
           <div className="flex items-center justify-end gap-2">
             <SocialLinks className="hidden xl:flex" />

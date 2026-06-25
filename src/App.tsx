@@ -249,7 +249,7 @@ export default function App() {
   let page: JSX.Element = <HomePage onNavigate={navigate} />;
   if (path === "/about") page = <AboutPage />;
   else if (path === "/programs") page = <ProgramsPage />;
-  else if (path === "/projects") page = <ProjectsPage />;
+  // else if (path === "/projects") page = <ProjectsPage />;
   else if (path === "/events" || path === "/conference") page = <EventsPage />;
   else if (path === "/news") page = <NewsPage />;
   else if (path === "/membership") page = <MembershipPage />;

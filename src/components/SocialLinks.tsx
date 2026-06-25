@@ -27,7 +27,7 @@ export function SocialLinks({
       : "text-navy/70 hover:bg-navy/5 hover:text-navy";
 
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
+    <div className={`flex items-center gap-3 pr-28 ${className}`}>
       {socials.map(({ href, label, Icon }) => (
         <a
           key={label}
@@ -37,7 +37,7 @@ export function SocialLinks({
           aria-label={label}
           className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors ${iconClass}`}
         >
-          <Icon className="h-4 w-4" />
+          <Icon className="h-5 w-5" />
         </a>
       ))}
     </div>

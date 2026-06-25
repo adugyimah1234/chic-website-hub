@@ -19,7 +19,7 @@ export function NavLink({
         event.preventDefault();
         onNavigate(href);
       }}
-      className={`group relative flex items-center gap-1.5 rounded-md px-2.5 py-2 font-display text-[10px] font-bold uppercase tracking-[0.12em] transition-colors hover:text-navy ${
+      className={`group relative flex items-center gap-1.5 rounded-md px-2.5 py-2 font-display text-[12px] font-bold uppercase tracking-[0.04em] transition-colors hover:text-navy ${
         active ? "text-navy" : "text-slate-600"
       }`}
     >
