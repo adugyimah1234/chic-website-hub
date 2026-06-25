@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { nav } from "./site-nav";
+import { SocialLinks } from "./SocialLinks";
 
 export function MobileNav({
   open,
@@ -15,7 +16,7 @@ export function MobileNav({
     <>
       <button
         onClick={() => setOpen(!open)}
-        className="rounded-md p-2 text-navy transition-transform active:scale-90 lg:hidden"
+        className="rounded-md p-2 text-navy transition-transform active:scale-90 xl:hidden"
         aria-label="Menu"
       >
         <AnimatePresence mode="wait" initial={false}>
@@ -39,7 +40,7 @@ export function MobileNav({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="max-h-[calc(100vh-4.5rem)] overflow-y-auto border-t border-border bg-white lg:hidden"
+            className="max-h-[calc(100vh-4.5rem)] overflow-y-auto border-t border-border bg-white xl:hidden"
           >
             <div className="container-page flex flex-col py-2">
               {nav.map((n, i) => (
@@ -62,6 +63,9 @@ export function MobileNav({
                   </a>
                 </motion.div>
               ))}
+              <div className="border-t border-border px-1 py-5">
+                <SocialLinks />
+              </div>
             </div>
           </motion.div>
         )}

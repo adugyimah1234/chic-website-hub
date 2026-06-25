@@ -8,18 +8,17 @@ export function PageHeader({
   subtitle?: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-background text-[#E2E8F0] border-b border-steel-blue/15">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-40%,#163660_0%,transparent_70%)] pointer-events-none" />
+    <section className="relative overflow-hidden border-b border-steel-blue/15 bg-navy text-[#E2E8F0]">
+      <div className="hero-wcm-pattern pointer-events-none absolute inset-0 opacity-40" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_-40%,#243a5e_0%,transparent_70%)]" />
       <div className="container-page relative py-20 md:py-28">
         <div className="max-w-3xl">
-          <span className="text-xs font-semibold uppercase tracking-[0.08em] text-gold">
-            {eyebrow}
-          </span>
-          <h1 className="mt-4 font-display text-4xl font-extrabold uppercase leading-none tracking-tight text-white md:text-5xl lg:text-6xl">
+          <span className="eyebrow-gold">{eyebrow}</span>
+          <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.05] tracking-normal text-white md:text-5xl lg:text-6xl">
             {title}
           </h1>
           {subtitle && (
-            <p className="mt-6 max-w-2xl font-serif text-lg leading-relaxed text-slate-300 italic">
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-300">
               {subtitle}
             </p>
           )}

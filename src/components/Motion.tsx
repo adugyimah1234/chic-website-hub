@@ -8,7 +8,6 @@ export const fadeUp: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
 };
 
-
 export function Reveal({
   children,
   delay = 0,
@@ -82,10 +81,7 @@ export function ScrollProgress() {
 
   useEffect(() => {
     return scrollYProgress.on("change", (latest) => {
-      const activeIndex = Math.min(
-        Math.floor(latest * totalTicks),
-        totalTicks - 1
-      );
+      const activeIndex = Math.min(Math.floor(latest * totalTicks), totalTicks - 1);
       setActiveTick(activeIndex);
     });
   }, [scrollYProgress]);
@@ -101,7 +97,6 @@ export function ScrollProgress() {
     </div>
   );
 }
-
 
 export function PageTransition({ children }: { children: ReactNode }) {
   return (

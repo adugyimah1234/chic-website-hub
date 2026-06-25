@@ -1,10 +1,5 @@
-# WCM Ghana Project Notes
-
-## Follow-up
-
-- [ ] Review the homepage copy for any final editorial edits.
-- [ ] Confirm all page URLs and social metadata after deployment.
-- [ ] Review the contact form delivery target and update the API endpoint if needed.
-- [ ] Replace any placeholder imagery if the final approved assets change.
-- [ ] Run a final mobile and desktop QA pass in production.
+# TODO
+- [ ] Update `vercel.json` to prevent SPA rewrite from intercepting `/api/*` calls to the contact endpoint.
+- [ ] Confirm deployment target supports PHP server execution. If not, replace `public/api/contact.php` with a Vercel-compatible API route (Node/serverless) or use a PHP hosting integration.
+- [ ] After routing fix, re-test the form submission and confirm the network request returns `{ ok: true }`.
 
