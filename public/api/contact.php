@@ -77,12 +77,35 @@ $headers = [
     "Reply-To: {$name} <{$email}>",
 ];
 
-$sent = @mail($to, $encodedSubject, $body, implode("\r\n", $headers));
+// IMPORTANT: some hosts require removing the error-suppression operator '@'
+// so that PHP error logging captures the real mail() failure.
+$sent = mail($to, $encodedSubject, $body, implode("\r\n", $headers));
 
 if (!$sent) {
+    $error = 'Unable to send message. Please try again later.';
+
+    // In non-production, return diagnostic info.
+    $appEnv = ($_SERVER['APP_ENV'] ?? getenv('APP_ENV') ?? '');
+    if ($appEnv !== 'production') {
+        $error = 'Unable to send message.';
+        $debug = [
+            'to' => $to,
+            'from' => $from,
+            'site' => $site,
+            'subject' => $subject,
+            'mail_function_exists' => function_exists('mail'),
+            'last_error' => error_get_last(),
+        ];
+
+        http_response_code(500);
+        echo json_encode(['ok' => false, 'error' => $error, 'debug' => $debug]);
+        exit;
+    }
+
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'Unable to send message. Please try again later.']);
+    echo json_encode(['ok' => false, 'error' => $error]);
     exit;
 }
 
 echo json_encode(['ok' => true]);
+
